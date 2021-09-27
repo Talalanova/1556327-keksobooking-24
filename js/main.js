@@ -13,7 +13,7 @@ getRandomInRange(0,12);
 
 function getRandomFloatInRange (min,max,n) {
   if (max > min && min >= 0) {
-    return Number((Math.random() * (max-min)+min).toFixed(n));
+    return +(Math.random() * (max-min)+min).toFixed(n);
   }
   console.log('Пожалуйста, введите корректный диапазон значений');
 }
