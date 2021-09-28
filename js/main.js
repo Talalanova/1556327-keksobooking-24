@@ -1,21 +1,21 @@
-// Функция, возвращающая целое число в диапазоне от нуля до заданного значения включительно
+// Функция, возвращающая положительное случайное целое число
 
-function getRandomInRange (min,max) {
-  if (max > min && min >= 0) {
-    return Math.floor(Math.random() * (max-min+1)+min);
-  }
-  console.log('Пожалуйста, введите корректный диапазон значений');
+function getRandomInRange (min, max) {
+  const minAbs = Math.abs(min);
+  const maxAbs = Math.abs(max);
+  const result = Math.floor(Math.random() * (Math.max(maxAbs, minAbs) - Math.min(maxAbs, minAbs) + 1) + Math.min(maxAbs, minAbs));
+  return result;
 }
 
 getRandomInRange(0,12);
 
-// Функция, возвращающая случайное число с плавающей точкой в диапазоне от нуля включительно до заданного значения
+// Функция, возвращающая положительное случайное число с плавающей точкой
 
-function getRandomFloatInRange (min,max,n) {
-  if (max > min && min >= 0) {
-    return +(Math.random() * (max-min)+min).toFixed(n);
-  }
-  console.log('Пожалуйста, введите корректный диапазон значений');
+function getRandomFloatInRange (min, max, symbolsAfterDot) {
+  const minAbs = Math.abs(min);
+  const maxAbs = Math.abs(max);
+  const result = Math.random() * (Math.max(maxAbs, minAbs) - Math.min(maxAbs, minAbs)) + Math.min(maxAbs, minAbs);
+  return +result.toFixed(symbolsAfterDot);
 }
 
 getRandomFloatInRange (0, 5, 3);
