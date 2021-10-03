@@ -67,10 +67,10 @@ const createLocation = () => {
 };
 
 const createAuthor = (picNumber) => {
-  let number = picNumber < 10 ? '0' + picNumber : picNumber;
+  const number = picNumber < 10 ? '0' + picNumber : picNumber;
   return {
-      avatar: 'img/avatars/user' + number + '.png',
-    };
+    avatar: 'img/avatars/user' + number + '.png',
+  };
 };
 
 const createOffer = (location) => {
@@ -78,23 +78,23 @@ const createOffer = (location) => {
   const randomCheckin = CHECKINS[_.random(0, CHECKINS.length -1)];
   return {
     title: 'Сдам квартиру',
-    adress: location.lat  + ', ' + location.lng,
+    address: location.lat  + ', ' + location.lng,
     price: randomPrice,
     type: TYPES[_.random(0,TYPES.length - 1)],
     rooms: _.random(1,maxRooms),
     guests: _.random(1,maxGuests),
     checkin: randomCheckin,
     checkout: CHECKOUTS[_.random(0,CHECKOUTS.length -1)],
-    features: (_.shuffle(FEATURES)).slice(0,_.random(0,FEATURES.length -1)),
+    features: (_.shuffle(FEATURES)).slice(0,_.random(1,FEATURES.length -1)),
     description: 'Плати ' + randomPrice + ' и приезжай в ' + randomCheckin + '! :) ',
-    photos: (_.shuffle(PHOTOS)).slice(0,_.random(0,PHOTOS.length -1)),
+    photos: (_.shuffle(PHOTOS)).slice(0,_.random(1,PHOTOS.length -1)),
   };
 };
 
-const createAdvertisment = () => {
+const createAdvertisment = (index) => {
   const randomLocation = createLocation();
   const randomOffer = createOffer(randomLocation);
-  const randomAuthor = createAuthor(4);
+  const randomAuthor = createAuthor(index);
   return {
     author: randomAuthor,
     offer: randomOffer,
@@ -102,7 +102,6 @@ const createAdvertisment = () => {
   };
 };
 
-createAdvertisment();
+const similarAdvertisments = new Array(10).fill().map((_,index) => createAdvertisment(index + 1 ));
 
-
-//
+window.console.log(similarAdvertisments);
