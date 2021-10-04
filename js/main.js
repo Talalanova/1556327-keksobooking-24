@@ -1,25 +1,3 @@
-// Функция, возвращающая положительное случайное целое число
-
-function getRandomInRange (min, max) {
-  const minAbs = Math.abs(min);
-  const maxAbs = Math.abs(max);
-  const result = Math.floor(Math.random() * (Math.max(maxAbs, minAbs) - Math.min(maxAbs, minAbs) + 1) + Math.min(maxAbs, minAbs));
-  return result;
-}
-
-getRandomInRange(0,12);
-
-// Функция, возвращающая положительное случайное число с плавающей точкой
-
-function getRandomFloatInRange (min, max, symbolsAfterDot) {
-  const minAbs = Math.abs(min);
-  const maxAbs = Math.abs(max);
-  const result = Math.random() * (Math.max(maxAbs, minAbs) - Math.min(maxAbs, minAbs)) + Math.min(maxAbs, minAbs);
-  return +result.toFixed(symbolsAfterDot);
-}
-
-getRandomFloatInRange (0, 5, 3);
-
 const TYPES = [
   'palace',
   'flat',
@@ -69,7 +47,7 @@ const createLocation = () => {
 const createAuthor = (picNumber) => {
   const number = picNumber < 10 ? '0' + picNumber : picNumber;
   return {
-    avatar: 'img/avatars/user' + number + '.png',
+    avatar: `img/avatars/user${number}.png`,
   };
 };
 
@@ -86,7 +64,7 @@ const createOffer = (location) => {
     checkin: randomCheckin,
     checkout: CHECKOUTS[_.random(0,CHECKOUTS.length -1)],
     features: (_.shuffle(FEATURES)).slice(0,_.random(1,FEATURES.length -1)),
-    description: 'Плати ' + randomPrice + ' и приезжай в ' + randomCheckin + '! :) ',
+    description: `Ждем тебя в ${randomCheckin}`,
     photos: (_.shuffle(PHOTOS)).slice(0,_.random(1,PHOTOS.length -1)),
   };
 };
