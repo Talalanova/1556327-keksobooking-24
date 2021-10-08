@@ -37,15 +37,13 @@ const maxPrice = 100000;
 const maxRooms = 5;
 const maxGuests = 10;
 
-const createLocation = () => {
-  return {
-    lat: _.random(35.65000, 35.70000),
-    lng: _.random(139.70000, 139.80000),
-  };
-};
+const createLocation = () => ({
+  lat: _.random(35.65000, 35.70000),
+  lng: _.random(139.70000, 139.80000),
+});
 
 const createAuthor = (picNumber) => {
-  const number = picNumber < 10 ? '0' + picNumber : picNumber;
+  const number = picNumber < 10 ? `0${picNumber}` : picNumber;
   return {
     avatar: `img/avatars/user${number}.png`,
   };
@@ -56,7 +54,7 @@ const createOffer = (location) => {
   const randomCheckin = CHECKINS[_.random(0, CHECKINS.length -1)];
   return {
     title: 'Сдам квартиру',
-    address: location.lat  + ', ' + location.lng,
+    address: `${location.lat},${location.lng}`,
     price: randomPrice,
     type: TYPES[_.random(0,TYPES.length - 1)],
     rooms: _.random(1,maxRooms),
@@ -80,4 +78,6 @@ const createAdvertisment = (index) => {
   };
 };
 
-export {createAdvertisment};
+const getSimilarAdvertisments = () => new Array(10).fill().map((_,index) => createAdvertisment(index + 1 ));
+
+export {getSimilarAdvertisments};

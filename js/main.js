@@ -1,5 +1,5 @@
-import {createAdvertisment} from './createAdvertisment.js';
+import {getSimilarAdvertisments} from './get-similar-advertisments.js';
 
-const similarAdvertisments = new Array(10).fill().map((_,index) => createAdvertisment(index + 1 ));
+getSimilarAdvertisments();
 
-window.console.log(similarAdvertisments);
+window.console.log(getSimilarAdvertisments());
