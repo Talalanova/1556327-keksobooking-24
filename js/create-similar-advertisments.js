@@ -53,10 +53,11 @@ for (let i = 0; i < similarAdvertisments.length; i++) {
 
   const photosContainer = advertisment.querySelector('.popup__photos');
   const photo = photosContainer.querySelector('.popup__photo');
+  photo.src = similarAdvertisments[i].offer.photos;
   for (let i = 0; i < similarAdvertisments[i].offer.photos.length - 1; i++) {
     const duplicatePhoto = photo.cloneNode(true);
+    duplicatePhoto.src = similarAdvertisments[i].offer.photos[i+1];
     photosContainer.appendChild(duplicatePhoto);
-    photo.src = similarAdvertisments[i].offer.photos;
   }
 
   const avatar = advertisment.querySelector('.popup__avatar');
