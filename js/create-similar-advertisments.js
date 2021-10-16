@@ -1,4 +1,6 @@
-import {similarAdvertisments} from './get-similar-advertisments.js';
+import {getSimilarAdvertisments} from './get-similar-advertisments.js';
+
+const similarAdvertisments = getSimilarAdvertisments(1);
 
 const TYPE = {
   flat : 'Квартира',
@@ -7,6 +9,7 @@ const TYPE = {
   palace : 'Дворец',
   hotel : 'Отель',
 };
+
 const advertismentContainer = document.querySelector('.map__canvas');
 
 const templateFragment = document.querySelector('#card').content;
@@ -50,11 +53,7 @@ for (let i = 0; i < similarAdvertisments.length; i++) {
 
   const photosContainer = advertisment.querySelector('.popup__photos');
   const photo = photosContainer.querySelector('.popup__photo');
-  // for (i = 0; i < similarAdvertisments[i].offer.photos.length - 1; i++) {
-  //   const photos = photo.cloneNode(false);
-  //   photosContainer.appendChild(photos);
-  //   photo.src = similarAdvertisments[i].offer.photos;
-  // }
+  photo.src = similarAdvertisments[i].offer.photos;
 
   const avatar = advertisment.querySelector('.popup__avatar');
   avatar.src = similarAdvertisments[i].author.avatar;
