@@ -34,7 +34,7 @@ const PHOTOS = [
   'https://bipbap.ru/wp-content/uploads/2017/04/priroda_kartinki_foto_03.jpg',
   'https://vjoy.cc/wp-content/uploads/2019/10/03f312a04e6c61405073cd4932cf69ed.jpg',
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS50varCsjs3D-U5xhkUaubOfixfkqTw741Ow&usqp=CAU',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRauLLcRzE0dCqqYaAZ1uU5hl9DZ57dEFPWIw&usqp=CAU',
+  'https://avatarko.ru/img/kartinka/2/zhivotnye_kot_prikol_ochki_1637.jpg',
 ];
 
 const maxPrice = 100000;
