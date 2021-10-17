@@ -82,6 +82,6 @@ const createAdvertisment = (index) => {
   };
 };
 
-const getSimilarAdvertisments = (n) => new Array(n).fill().map((_,index) => createAdvertisment(index + 1 ));
+const getAdvertisment = (n) => new Array(n).fill().map((_,index) => createAdvertisment(index + 1));
 
-export {getSimilarAdvertisments};
+export {getAdvertisment};
