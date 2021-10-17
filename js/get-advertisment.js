@@ -31,6 +31,10 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
+  'https://bipbap.ru/wp-content/uploads/2017/04/priroda_kartinki_foto_03.jpg',
+  'https://vjoy.cc/wp-content/uploads/2019/10/03f312a04e6c61405073cd4932cf69ed.jpg',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS50varCsjs3D-U5xhkUaubOfixfkqTw741Ow&usqp=CAU',
+  'https://avatarko.ru/img/kartinka/2/zhivotnye_kot_prikol_ochki_1637.jpg',
 ];
 
 const maxPrice = 100000;
@@ -78,6 +82,6 @@ const createAdvertisment = (index) => {
   };
 };
 
-const getSimilarAdvertisments = () => new Array(10).fill().map((_,index) => createAdvertisment(index + 1 ));
+const getAdvertisment = (n) => new Array(n).fill().map((_,index) => createAdvertisment(index + 1));
 
-export {getSimilarAdvertisments};
+export {getAdvertisment};

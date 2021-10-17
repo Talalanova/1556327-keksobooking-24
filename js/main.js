@@ -1,5 +1,4 @@
-import {getSimilarAdvertisments} from './get-similar-advertisments.js';
+import {getAdvertisment} from './get-advertisment.js';
+import {drawAdvertisments} from './draw-advertisment.js';
 
-getSimilarAdvertisments();
-
-window.console.log(getSimilarAdvertisments());
+drawAdvertisments(getAdvertisment(10));
