@@ -31,11 +31,14 @@ const MIN_PRICE = {
 
 apartmentType.addEventListener('change', () => {
   priceInput.placeholder = MIN_PRICE[apartmentType.value];
+  priceInput.min = MIN_PRICE[apartmentType.value];
 });
+
+// Вставка priceInput.min в условие checkingPrice ломает проверку :с
 
 const checkingPrice = () => {
   if (priceInput.value < MIN_PRICE[apartmentType.value]) {
-    priceInput.setCustomValidity(`Минимальная стоимость  - ${MIN_PRICE[apartmentType.value]} р.`);
+    priceInput.setCustomValidity(`Минимальная стоимость - ${MIN_PRICE[apartmentType.value]} р.`);
   } else {
     priceInput.setCustomValidity('');
   }
@@ -55,9 +58,9 @@ const capacity = adForm.querySelector('#capacity');
 
 const checkingCapacity = () => {
   if (capacity.value === '0' && roomNumber.value !=='100') {
-    capacity.setCustomValidity('Этот тип жилья только для гостей');
+    capacity.setCustomValidity('Это жилье только для гостей');
   } else if (roomNumber.value === '100' && capacity.value > 0) {
-    capacity.setCustomValidity('В этом типе жилья нельля размещать гостей');
+    capacity.setCustomValidity('В этом жилье нельзя размещать гостей');
   } else if (capacity.value > roomNumber.value) {
     capacity.setCustomValidity('Слишком много гостей для выбранного количества комнат');
   } else {
