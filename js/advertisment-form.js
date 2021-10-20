@@ -33,41 +33,43 @@ apartmentType.addEventListener('change', () => {
   priceInput.placeholder = MIN_PRICE[apartmentType.value];
 });
 
-priceInput.addEventListener('input', () => {
+const checkingPrice = () => {
   if (priceInput.value < MIN_PRICE[apartmentType.value]) {
     priceInput.setCustomValidity(`Минимальная стоимость  - ${MIN_PRICE[apartmentType.value]} р.`);
   } else {
     priceInput.setCustomValidity('');
   }
   priceInput.reportValidity();
+};
+
+priceInput.addEventListener('input', () => {
+  checkingPrice();
 });
 
 apartmentType.addEventListener('change', () => {
-  if (priceInput.value < MIN_PRICE[apartmentType.value]) {
-    priceInput.setCustomValidity(`Минимальная стоимость  - ${MIN_PRICE[apartmentType.value]} р.`);
-  } else {
-    priceInput.setCustomValidity('');
-  }
-  priceInput.reportValidity();
+  checkingPrice();
 });
 
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
 
-capacity.addEventListener('change', () => {
-  if (capacity.value > roomNumber.value) {
+const checkingCapacity = () => {
+  if (capacity.value === '0' && roomNumber.value !=='100') {
+    capacity.setCustomValidity('Этот тип жилья только для гостей');
+  } else if (roomNumber.value === '100' && capacity.value > 0) {
+    capacity.setCustomValidity('В этом типе жилья нельля размещать гостей');
+  } else if (capacity.value > roomNumber.value) {
     capacity.setCustomValidity('Слишком много гостей для выбранного количества комнат');
   } else {
     capacity.setCustomValidity('');
   }
   capacity.reportValidity();
+};
+
+capacity.addEventListener('change', () => {
+  checkingCapacity();
 });
 
 roomNumber.addEventListener('change', () => {
-  if (capacity.value > roomNumber.value) {
-    capacity.setCustomValidity('Слишком много гостей для выбранного количества комнат');
-  } else {
-    capacity.setCustomValidity('');
-  }
-  capacity.reportValidity();
+  checkingCapacity();
 });
