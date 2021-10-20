@@ -31,14 +31,12 @@ const MIN_PRICE = {
 
 apartmentType.addEventListener('change', () => {
   priceInput.placeholder = MIN_PRICE[apartmentType.value];
-  priceInput.min = MIN_PRICE[apartmentType.value];
 });
 
-// Вставка priceInput.min в условие checkingPrice ломает проверку :с
-
 const checkingPrice = () => {
-  if (priceInput.value < MIN_PRICE[apartmentType.value]) {
-    priceInput.setCustomValidity(`Минимальная стоимость - ${MIN_PRICE[apartmentType.value]} р.`);
+  priceInput.min = MIN_PRICE[apartmentType.value];
+  if (priceInput.value < priceInput.min) {
+    priceInput.setCustomValidity(`Минимальная стоимость - ${priceInput.min} р.`);
   } else {
     priceInput.setCustomValidity('');
   }
@@ -75,4 +73,15 @@ capacity.addEventListener('change', () => {
 
 roomNumber.addEventListener('change', () => {
   checkingCapacity();
+});
+
+const timeIn = adForm.querySelector('#timein');
+const timeOut = adForm.querySelector('#timeout');
+
+timeIn.addEventListener('change', () => {
+  timeOut.value = timeIn.value;
+});
+
+timeOut.addEventListener('change', () => {
+  timeIn.value = timeOut.value;
 });
