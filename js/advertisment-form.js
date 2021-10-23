@@ -85,3 +85,39 @@ timeIn.addEventListener('change', () => {
 timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
+
+const mapFilters = document.querySelector('.map__filters');
+const mapFiltersElements = mapFilters.getElementsByTagName('select');
+const mapFiltersElementsArr = Array.from(mapFiltersElements);
+
+const adFormElements = adForm.getElementsByTagName('fieldset');
+const formElementsArr = Array.from(adFormElements);
+
+const disableForm = () => {
+  adForm.classList.add('ad-form--disabled');
+  mapFilters.classList.add('ad-form--disabled');
+
+  formElementsArr.forEach((item) => {
+    item.setAttribute('disabled',true);
+  });
+
+  mapFiltersElementsArr.forEach((item) => {
+    item.setAttribute('disabled',true);
+  });
+};
+
+const activateForm = () => {
+  adForm.classList.remove('ad-form--disabled');
+  mapFilters.classList.remove('ad-form--disabled');
+
+  formElementsArr.forEach((item) => {
+    item.removeAttribute('disabled');
+  });
+
+  mapFiltersElementsArr.forEach((item) => {
+    item.removeAttribute('disabled');
+  });
+};
+
+export{disableForm};
+export{activateForm};
