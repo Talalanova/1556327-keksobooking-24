@@ -48,10 +48,4 @@ const getAdTemplate = (item) => {
   return advertisment;
 };
 
-const drawAdvertisments = (data) => {
-  data.forEach((element) => {
-    advertismentContainer.appendChild(getAdTemplate(element));
-  });
-};
-
-export {drawAdvertisments};
+export {getAdTemplate};
