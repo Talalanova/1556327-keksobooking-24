@@ -1,4 +1,7 @@
 import {getAdvertisment} from './get-advertisment.js';
-import {drawAdvertisments} from './draw-advertisment.js';
 import './advertisment-form.js';
-drawAdvertisments(getAdvertisment(10));
+import {renderMarkers} from './map.js';
+import {clearMarkers} from './map.js';
+
+renderMarkers(getAdvertisment(10));
+
