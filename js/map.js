@@ -40,13 +40,15 @@ mainMarker.addTo(map);
 const address = document.querySelector('#address');
 
 mainMarker.on('moveend', (evt) => {
-  address.value = (evt.target.getLatLng());
+  address.value = `${evt.target.getLatLng().lat}, ${evt.target.getLatLng().lng}`;
 });
 
+const markerGroup = L.layerGroup().addTo(map);
+
 const renderMarkers = (advertisments) => {
-  for (let i = 0; i < advertisments.length; i++) {
-    const lat = advertisments[i].location.lat;
-    const lng = advertisments[i].location.lng;
+  advertisments.forEach((ad) => {
+    const lat = ad.location.lat;
+    const lng = ad.location.lng;
     const icon = L.icon({
       iconUrl: 'img/pin.svg',
       iconSize: [40, 40],
@@ -62,9 +64,15 @@ const renderMarkers = (advertisments) => {
       },
     );
     marker
-      .addTo(map)
-      .bindPopup(getAdTemplate(advertisments[i]));
-  }
+      .addTo(markerGroup)
+      .bindPopup(getAdTemplate(ad));
+  });
+};
+
+const clearMarkers = () => {
+  markerGroup.clearLayers();
 };
 
 export {renderMarkers};
+export {clearMarkers};
+

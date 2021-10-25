@@ -6,8 +6,6 @@ const TYPE = {
   hotel : 'Отель',
 };
 
-const advertismentContainer = document.querySelector('.map__canvas');
-
 const templateFragment = document.querySelector('#card').content;
 const template = templateFragment.querySelector('article');
 

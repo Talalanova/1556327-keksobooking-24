@@ -98,11 +98,11 @@ const disableForm = () => {
   mapFilters.classList.add('ad-form--disabled');
 
   formElementsArr.forEach((item) => {
-    item.setAttribute('disabled',true);
+    item.disabled = true;
   });
 
   mapFiltersElementsArr.forEach((item) => {
-    item.setAttribute('disabled',true);
+    item.disabled = true;
   });
 };
 
@@ -111,11 +111,11 @@ const activateForm = () => {
   mapFilters.classList.remove('ad-form--disabled');
 
   formElementsArr.forEach((item) => {
-    item.removeAttribute('disabled');
+    item.disabled = false;
   });
 
   mapFiltersElementsArr.forEach((item) => {
-    item.removeAttribute('disabled');
+    item.disabled = false;
   });
 };
 
