@@ -1,5 +1,4 @@
-// import {disableForm} from './advertisment-form.js';
-import {activateForm} from './advertisment-form.js';
+import {activateForm,adForm,formReset,address} from './advertisment-form.js';
 import {getAdTemplate} from './draw-advertisment.js';
 
 const map = L.map('map-canvas')
@@ -37,7 +36,7 @@ const mainMarker = L.marker(
 
 mainMarker.addTo(map);
 
-const address = document.querySelector('#address');
+address.value = `${mainMarker.getLatLng().lat}, ${mainMarker.getLatLng().lng}`;
 
 mainMarker.on('moveend', (evt) => {
   address.value = `${evt.target.getLatLng().lat}, ${evt.target.getLatLng().lng}`;
@@ -73,6 +72,28 @@ const clearMarkers = () => {
   markerGroup.clearLayers();
 };
 
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  mainMarker.setLatLng(
+    {
+      lat: 35.4200,
+      lng: 139.2530,
+    },
+  );
+});
+
+formReset.addEventListener('click', () => {
+  mainMarker.setLatLng(
+    {
+      lat: 35.4200,
+      lng: 139.2530,
+    },
+  );
+  address.value = `${mainMarker.getLatLng().lat}, ${mainMarker.getLatLng().lng}`;
+  markerGroup.closePopup();
+});
+
+
 export {renderMarkers};
 export {clearMarkers};
-
+export {mainMarker};

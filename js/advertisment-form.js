@@ -1,30 +1,32 @@
 import {showAlert} from './util.js';
+import {sendData} from './api.js';
+import {mainMarker} from './api.js';
 
 const adForm = document.querySelector('.ad-form');
+const mapFilters = document.querySelector('.map__filters');
+const formReset = adForm.querySelector('.ad-form__reset');
+const address = adForm.querySelector('#address');
 
 const setUserFormSubmit = (onSuccess) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const formData = new FormData(evt.target);
-    fetch(
-      'https://24.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
+    sendData(
+      () => {
+        onSuccess();
+        adForm.reset();
+        mapFilters.reset();
+        address.value = `${mainMarker.getLatLng().lat}, ${mainMarker.getLatLng().lng}`;
       },
-    )
-      .then((response) => {
-        if (response.ok) {
-          onSuccess();
-        } else {
-          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
-        }
-      })
-      .catch(() => {
-        showAlert('Не удалось отправить форму. Попробуйте ещё раз');
-      });
+      () => showAlert('Не удалось отправить форму. Проверьте обязательные поля и попробуйте ещё раз'),
+      new FormData(evt.target),
+    );
   });
 };
+
+formReset.addEventListener('click', () => {
+  adForm.reset();
+  mapFilters.reset();
+});
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -112,7 +114,6 @@ timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
 
-const mapFilters = document.querySelector('.map__filters');
 const mapFiltersElements = mapFilters.getElementsByTagName('select');
 const mapFiltersElementsArr = Array.from(mapFiltersElements);
 
@@ -145,6 +146,8 @@ const activateForm = () => {
   });
 };
 
-export{disableForm};
+disableForm();
+
 export{activateForm};
 export {setUserFormSubmit};
+export {adForm,formReset,address};
