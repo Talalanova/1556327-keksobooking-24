@@ -54,6 +54,7 @@ const makeMap = (mainMarkerCoordinates) =>
     },
     clearMarkers: () => markerGroup.clearLayers(),
     onMainMarkerMoveEnd: (func) => mainMarker.on('moveend', (evt) => func(evt.target.getLatLng())),
+    closePopup: () => markerGroup.closePopup(),
   };
 };
 

@@ -1,7 +1,8 @@
 import {showAlert} from './util.js';
-import {sendData} from './api.js';
+import {sendData,getData} from './api.js';
 import { showSuccessMessage } from './show-success-message.js';
-import {map,TOKIO_CENTER} from './map-set.js';
+import {map,TOKIO_CENTER,renderMarkers} from './map-set.js';
+import {getAdTemplate} from './draw-advertisment.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -49,6 +50,10 @@ const setUserFormSubmit = () => {
 const resetForm = () => {
   adForm.reset();
   mapFilters.reset();
+  map.clearMarkers();
+  getData((advertisments) => {
+    renderMarkers(advertisments,getAdTemplate);
+  });
   map.setMainMarkerPos(TOKIO_CENTER);
   address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
 };
