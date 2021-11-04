@@ -1,8 +1,8 @@
 import {showAlert} from './util.js';
 
 
-const serverSend = 'https://24.javascript.pages.academy/keksobooking1';
-const serverGet = 'https://24.javascript.pages.academy/keksobooking/data1';
+const serverSend = 'https://24.javascript.pages.academy/keksobooking';
+const serverGet = 'https://24.javascript.pages.academy/keksobooking/data';
 
 
 const getData = (onSuccess) => {
