@@ -7,16 +7,16 @@ const messageContainer = document.querySelector('.map');
 
 const showSuccessMessage = () => {
   messageContainer.appendChild(successMessage);
-};
 
-window.addEventListener('click', () => {
-  messageContainer.removeChild(successMessage);
-});
-
-window.addEventListener('keydown', (evt) => {
-  if (isEscapeKey(evt)) {
+  window.addEventListener('click', () => {
     messageContainer.removeChild(successMessage);
-  }
-});
+  });
+
+  window.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      messageContainer.removeChild(successMessage);
+    }
+  });
+};
 
 export {showSuccessMessage};
