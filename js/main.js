@@ -1,7 +1,11 @@
-import {getAdvertisment} from './get-advertisment.js';
-import './advertisment-form.js';
-import {renderMarkers} from './map.js';
-import {clearMarkers} from './map.js';
+import {renderMarkers} from './map-set.js';
+import {setUserFormSubmit} from './advertisment-form.js';
+import {getData} from './api.js';
+import {getAdTemplate} from './draw-advertisment.js';
 
-renderMarkers(getAdvertisment(10));
+getData((advertisments) => {
+  renderMarkers(advertisments,getAdTemplate);
+});
+
+setUserFormSubmit();
 

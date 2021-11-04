@@ -1,9 +1,72 @@
-const adForm = document.querySelector('.ad-form');
+import {showAlert} from './util.js';
+import {sendData,getData} from './api.js';
+import { showSuccessMessage } from './show-success-message.js';
+import {map,TOKIO_CENTER,renderMarkers} from './map-set.js';
+import {getAdTemplate} from './draw-advertisment.js';
 
+const adForm = document.querySelector('.ad-form');
+const mapFilters = document.querySelector('.map__filters');
+const formResetButton = adForm.querySelector('.ad-form__reset');
+const address = adForm.querySelector('#address');
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
-
 const titleInput = adForm.querySelector('#title');
+const priceInput = adForm.querySelector('#price');
+const apartmentType = adForm.querySelector('#type');
+const roomNumber = adForm.querySelector('#room_number');
+const capacity = adForm.querySelector('#capacity');
+
+const MIN_PRICE = {
+  bungalow : 0,
+  hotel : 3000,
+  house : 5000,
+  palace : 10000,
+  flat : 1000,
+};
+
+const onSuccess = () => {
+  adForm.reset();
+  mapFilters.reset();
+  showSuccessMessage();
+  map.setMainMarkerPos(TOKIO_CENTER);
+  address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
+};
+
+const onError = () => {
+  showAlert('Не удалось отправить форму. Проверьте обязательные поля и попробуйте ещё раз');
+};
+
+const setUserFormSubmit = () => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    sendData(
+      onSuccess,
+      onError,
+      new FormData(evt.target),
+    );
+  });
+};
+
+const resetForm = () => {
+  adForm.reset();
+  mapFilters.reset();
+  map.clearMarkers();
+  getData((advertisments) => {
+    renderMarkers(advertisments,getAdTemplate);
+  });
+  map.setMainMarkerPos(TOKIO_CENTER);
+  address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
+};
+
+formResetButton.addEventListener('click', () => {
+  resetForm();
+});
+
+map.onMainMarkerMoveEnd((pos) => {
+  address.value = `${pos.lat}, ${pos.lng}`;
+});
+
+address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
 
 titleInput.addEventListener('input', () => {
   const valueLength = titleInput.value.length;
@@ -17,17 +80,6 @@ titleInput.addEventListener('input', () => {
   }
   titleInput.reportValidity();
 });
-
-const priceInput = adForm.querySelector('#price');
-const apartmentType = adForm.querySelector('#type');
-
-const MIN_PRICE = {
-  bungalow : 0,
-  hotel : 3000,
-  house : 5000,
-  palace : 10000,
-  flat : 1000,
-};
 
 apartmentType.addEventListener('change', () => {
   priceInput.placeholder = MIN_PRICE[apartmentType.value];
@@ -50,9 +102,6 @@ priceInput.addEventListener('input', () => {
 apartmentType.addEventListener('change', () => {
   checkingPrice();
 });
-
-const roomNumber = adForm.querySelector('#room_number');
-const capacity = adForm.querySelector('#capacity');
 
 const checkingCapacity = () => {
   if (capacity.value === '0' && roomNumber.value !=='100') {
@@ -86,7 +135,6 @@ timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
 
-const mapFilters = document.querySelector('.map__filters');
 const mapFiltersElements = mapFilters.getElementsByTagName('select');
 const mapFiltersElementsArr = Array.from(mapFiltersElements);
 
@@ -119,5 +167,8 @@ const activateForm = () => {
   });
 };
 
-export{disableForm};
-export{activateForm};
+disableForm();
+
+map.onLoad(activateForm());
+
+export{activateForm,setUserFormSubmit,adForm,formResetButton,address};
