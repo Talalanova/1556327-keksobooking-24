@@ -7,5 +7,6 @@ getData((advertisments) => {
   renderMarkers(advertisments,getAdTemplate);
 });
 
+
 setUserFormSubmit();
 

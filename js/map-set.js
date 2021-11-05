@@ -1,8 +1,8 @@
 import {makeMap} from './make-map-object.js';
 
 const TOKIO_CENTER = {
-  lat: 35.4200,
-  lng: 139.2530,
+  lat: 35.4100,
+  lng: 139.4130,
 };
 
 const map = makeMap(TOKIO_CENTER);
