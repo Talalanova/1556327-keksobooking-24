@@ -33,7 +33,6 @@ const makeMap = (mainMarkerCoordinates) =>
     setMainMarkerPos: (pos) => mainMarker.setLatLng(pos),
     setSecondaryMarkers: (advertisments,template) => {
       advertisments
-        .filter((ad) => ad.offer.type === 'flat')
         .forEach((ad) => {
           const lat = ad.location.lat;
           const lng = ad.location.lng;
