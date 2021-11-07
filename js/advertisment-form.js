@@ -3,9 +3,9 @@ import {sendData,getData} from './api.js';
 import { showSuccessMessage } from './show-success-message.js';
 import {map,TOKIO_CENTER,renderMarkers} from './map-set.js';
 import {getAdTemplate} from './draw-advertisment.js';
+import {mapFilters} from './map-filters.js';
 
 const adForm = document.querySelector('.ad-form');
-const mapFilters = document.querySelector('.map__filters');
 const formResetButton = adForm.querySelector('.ad-form__reset');
 const address = adForm.querySelector('#address');
 const MIN_TITLE_LENGTH = 30;
@@ -135,36 +135,23 @@ timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
 
-const mapFiltersElements = mapFilters.getElementsByTagName('select');
-const mapFiltersElementsArr = Array.from(mapFiltersElements);
-
 const adFormElements = adForm.getElementsByTagName('fieldset');
 const formElementsArr = Array.from(adFormElements);
 
 const disableForm = () => {
   adForm.classList.add('ad-form--disabled');
-  mapFilters.classList.add('ad-form--disabled');
-
   formElementsArr.forEach((item) => {
     item.disabled = true;
   });
 
-  mapFiltersElementsArr.forEach((item) => {
-    item.disabled = true;
-  });
 };
 
 const activateForm = () => {
   adForm.classList.remove('ad-form--disabled');
-  mapFilters.classList.remove('ad-form--disabled');
-
   formElementsArr.forEach((item) => {
     item.disabled = false;
   });
 
-  mapFiltersElementsArr.forEach((item) => {
-    item.disabled = false;
-  });
 };
 
 disableForm();
