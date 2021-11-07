@@ -8,24 +8,6 @@ const housingRooms = filtersForm.querySelector('#housing-rooms');
 const housingGuests = filtersForm.querySelector('#housing-guests');
 const housingFeatures = [...filtersForm.querySelectorAll('[type="checkbox"]')];
 const filtersFormElements = [...filtersForm.children];
-export const mapFilters = document.querySelector('.map__filters');
-
-const disableMapForm = () => {
-  mapFilters.classList.add('map__filters--disabled');
-
-  filtersFormElements.forEach((item) => {
-    item.disabled = true;
-  });
-};
-
-const activateMapForm = () => {
-  mapFilters.classList.remove('map__filters--disabled');
-
-  filtersFormElements.forEach((item) => {
-    item.disabled = false;
-  });
-};
-
 
 const HOUSING_TYPE_VALUES = {
   'any': (value) => value,
@@ -53,6 +35,7 @@ const GUESTS_VALUES = {
   '1': (value) => value === 1,
   '2': (value) => value === 2,
 };
+
 const filterByHousingType = (sortItem) => {
   const type = sortItem.offer.type;
   return HOUSING_TYPE_VALUES[housingType.value](type);
@@ -75,35 +58,35 @@ const filterByFeatures = (sortItem) => {
   return selectedFeatures.every((feature) => features && features.includes(feature.value));
 };
 
-export const typeCLick = (cb) => {
+const typeCLick = (cb) => {
   housingType.addEventListener('input', () => {
     map.clearMarkers();
     cb();
   });
 };
 
-export const roomsClick = (cb) => {
+const roomsClick = (cb) => {
   housingRooms.addEventListener('input', () => {
     map.clearMarkers();
     cb();
   });
 };
 
-export const guestsClick = (cb) => {
+const guestsClick = (cb) => {
   housingGuests.addEventListener('input', () => {
     map.clearMarkers();
     cb();
   });
 };
 
-export const priceClick = (cb) => {
+const priceClick = (cb) => {
   housingPrice.addEventListener('input', () => {
     map.clearMarkers();
     cb();
   });
 };
 
-export const featuresClick = (cb) => {
+const featuresClick = (cb) => {
   housingFeatures.forEach((item) => {
     item.addEventListener('click', () => {
       map.clearMarkers();
@@ -112,7 +95,7 @@ export const featuresClick = (cb) => {
   });
 };
 
-export function getFiltersData(advertisments) {
+function getFiltersData(advertisments) {
   return advertisments.filter((advertisment) =>
     filterByHousingType(advertisment) &&
     filterByPrice(advertisment) &&
@@ -121,6 +104,24 @@ export function getFiltersData(advertisments) {
     filterByFeatures(advertisment));
 }
 
+const disableMapForm = () => {
+  filtersForm.classList.add('map__filters--disabled');
+
+  filtersFormElements.forEach((item) => {
+    item.disabled = true;
+  });
+};
+
+const activateMapForm = () => {
+  filtersForm.classList.remove('map__filters--disabled');
+
+  filtersFormElements.forEach((item) => {
+    item.disabled = false;
+  });
+};
+
 disableMapForm();
 
 getData((activateMapForm));
+
+export {filtersForm, getFiltersData, featuresClick, priceClick, guestsClick, roomsClick, typeCLick};

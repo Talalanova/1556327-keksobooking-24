@@ -1,5 +1,3 @@
-// import {filterAds} from './map-filters.js';
-
 const makeMap = (mainMarkerCoordinates) =>
 {
   const map = L.map('map-canvas')

@@ -3,7 +3,7 @@ import {sendData,getData} from './api.js';
 import { showSuccessMessage } from './show-success-message.js';
 import {map,TOKIO_CENTER,renderMarkers} from './map-set.js';
 import {getAdTemplate} from './draw-advertisment.js';
-import {mapFilters} from './map-filters.js';
+import {filtersForm} from './map-filters.js';
 
 const adForm = document.querySelector('.ad-form');
 const formResetButton = adForm.querySelector('.ad-form__reset');
@@ -15,6 +15,10 @@ const priceInput = adForm.querySelector('#price');
 const apartmentType = adForm.querySelector('#type');
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
+const adFormElements = adForm.getElementsByTagName('fieldset');
+const formElementsArr = Array.from(adFormElements);
+const timeIn = adForm.querySelector('#timein');
+const timeOut = adForm.querySelector('#timeout');
 
 const MIN_PRICE = {
   bungalow : 0,
@@ -26,7 +30,7 @@ const MIN_PRICE = {
 
 const onSuccess = () => {
   adForm.reset();
-  mapFilters.reset();
+  filtersForm.reset();
   showSuccessMessage();
   map.setMainMarkerPos(TOKIO_CENTER);
   address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
@@ -49,7 +53,7 @@ const setUserFormSubmit = () => {
 
 const resetForm = () => {
   adForm.reset();
-  mapFilters.reset();
+  filtersForm.reset();
   map.clearMarkers();
   getData((advertisments) => {
     renderMarkers(advertisments,getAdTemplate);
@@ -124,9 +128,6 @@ roomNumber.addEventListener('change', () => {
   checkingCapacity();
 });
 
-const timeIn = adForm.querySelector('#timein');
-const timeOut = adForm.querySelector('#timeout');
-
 timeIn.addEventListener('change', () => {
   timeOut.value = timeIn.value;
 });
@@ -135,15 +136,11 @@ timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
 
-const adFormElements = adForm.getElementsByTagName('fieldset');
-const formElementsArr = Array.from(adFormElements);
-
 const disableForm = () => {
   adForm.classList.add('ad-form--disabled');
   formElementsArr.forEach((item) => {
     item.disabled = true;
   });
-
 };
 
 const activateForm = () => {
@@ -151,11 +148,10 @@ const activateForm = () => {
   formElementsArr.forEach((item) => {
     item.disabled = false;
   });
-
 };
 
 disableForm();
 
 map.onLoad(activateForm());
 
-export{activateForm,setUserFormSubmit,adForm,formResetButton,address};
+export {activateForm,setUserFormSubmit,adForm,address};
