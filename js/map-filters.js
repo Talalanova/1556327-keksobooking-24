@@ -58,40 +58,10 @@ const filterByFeatures = (sortItem) => {
   return selectedFeatures.every((feature) => features && features.includes(feature.value));
 };
 
-const typeCLick = (cb) => {
-  housingType.addEventListener('input', () => {
+const onFiltersFormChange = (cb) => {
+  filtersForm.addEventListener('change', () => {
     map.clearMarkers();
     cb();
-  });
-};
-
-const roomsClick = (cb) => {
-  housingRooms.addEventListener('input', () => {
-    map.clearMarkers();
-    cb();
-  });
-};
-
-const guestsClick = (cb) => {
-  housingGuests.addEventListener('input', () => {
-    map.clearMarkers();
-    cb();
-  });
-};
-
-const priceClick = (cb) => {
-  housingPrice.addEventListener('input', () => {
-    map.clearMarkers();
-    cb();
-  });
-};
-
-const featuresClick = (cb) => {
-  housingFeatures.forEach((item) => {
-    item.addEventListener('click', () => {
-      map.clearMarkers();
-      cb();
-    });
   });
 };
 
@@ -124,4 +94,4 @@ disableMapForm();
 
 getData((activateMapForm));
 
-export {filtersForm, getFiltersData, featuresClick, priceClick, guestsClick, roomsClick, typeCLick};
+export {filtersForm, getFiltersData,onFiltersFormChange};

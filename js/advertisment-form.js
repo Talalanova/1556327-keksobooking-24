@@ -31,6 +31,10 @@ const MIN_PRICE = {
 const onSuccess = () => {
   adForm.reset();
   filtersForm.reset();
+  map.clearMarkers();
+  getData((advertisments) => {
+    renderMarkers(advertisments,getAdTemplate);
+  });
   showSuccessMessage();
   map.setMainMarkerPos(TOKIO_CENTER);
   address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
