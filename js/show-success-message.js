@@ -9,14 +9,16 @@ const showSuccessMessage = () => {
   messageContainer.appendChild(successMessage);
 
   window.addEventListener('click', () => {
-    messageContainer.removeChild(successMessage);
-  });
+    successMessage.parentNode.removeChild(successMessage);
+  },
+  {once: true});
 
   window.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
-      messageContainer.removeChild(successMessage);
+      successMessage.parentNode.removeChild(successMessage);
     }
-  });
+  },
+  {once: true});
 };
 
 export {showSuccessMessage};

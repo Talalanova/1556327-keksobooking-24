@@ -1,4 +1,4 @@
-const TYPE = {
+const HOUSE_TYPES = {
   flat : 'Квартира',
   bungalow : 'Бунгало',
   house : 'Дом',
@@ -27,7 +27,7 @@ const getAdTemplate = (item) => {
   const description = advertisment.querySelector('.popup__description');
   item.offer.description ? description.textContent = item.offer.description : description.classList.add('visually-hidden');
   const type = advertisment.querySelector('.popup__type');
-  item.offer.type ? type.textContent =TYPE[item.offer.type] : type.classList.add('visually-hidden');
+  item.offer.type ? type.textContent = HOUSE_TYPES[item.offer.type] : type.classList.add('visually-hidden');
 
   const features = advertisment.querySelector('.popup__features');
   if (item.offer.features) {
