@@ -30,6 +30,7 @@ const onSuccess = () => {
   showSuccessMessage();
   map.setMainMarkerPos(TOKIO_CENTER);
   address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
+  priceInput.placeholder = MIN_PRICE[apartmentType.value];
 };
 
 const onError = () => {
@@ -56,6 +57,7 @@ const resetForm = () => {
   });
   map.setMainMarkerPos(TOKIO_CENTER);
   address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
+  priceInput.placeholder = MIN_PRICE[apartmentType.value];
 };
 
 formResetButton.addEventListener('click', () => {
@@ -70,7 +72,6 @@ address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
 
 titleInput.addEventListener('input', () => {
   const valueLength = titleInput.value.length;
-
   if (valueLength < MIN_TITLE_LENGTH) {
     titleInput.setCustomValidity(`Минимум ${ MIN_TITLE_LENGTH} символов`);
   } else if (valueLength > MAX_TITLE_LENGTH) {
@@ -86,9 +87,8 @@ apartmentType.addEventListener('change', () => {
 });
 
 const checkingPrice = () => {
-  priceInput.min = MIN_PRICE[apartmentType.value];
-  if (priceInput.value < priceInput.min) {
-    priceInput.setCustomValidity(`Минимальная стоимость - ${priceInput.min} р.`);
+  if (priceInput.value < MIN_PRICE[apartmentType.value]) {
+    priceInput.setCustomValidity(`Минимальная стоимость - ${MIN_PRICE[apartmentType.value]} р.`);
   } else {
     priceInput.setCustomValidity('');
   }
