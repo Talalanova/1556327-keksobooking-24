@@ -1,6 +1,6 @@
 import {showAlert} from './util.js';
 import {sendData,getData} from './api.js';
-import { showSuccessMessage } from './show-success-message.js';
+import {showSuccessMessage} from './show-success-message.js';
 import {map,TOKIO_CENTER,renderMarkers} from './map-set.js';
 import {getAdTemplate} from './draw-advertisment.js';
 import {filtersForm} from './map-filters.js';
@@ -20,12 +20,18 @@ const formElementsArr = Array.from(adFormElements);
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
 
-const MIN_PRICE = {
+const MIN_PRICES = {
   bungalow : 0,
   hotel : 3000,
   house : 5000,
   palace : 10000,
   flat : 1000,
+};
+
+const setDefaultOption = () => {
+  map.setMainMarkerPos(TOKIO_CENTER);
+  address.value = `${map.getMainMarkerPos().lat.toFixed(5)}, ${map.getMainMarkerPos().lng.toFixed(5)}`;
+  priceInput.placeholder = MIN_PRICES[apartmentType.value];
 };
 
 const onSuccess = () => {
@@ -36,9 +42,7 @@ const onSuccess = () => {
     renderMarkers(advertisments,getAdTemplate);
   });
   showSuccessMessage();
-  map.setMainMarkerPos(TOKIO_CENTER);
-  address.value = `${map.getMainMarkerPos().lat.toFixed(5)}, ${map.getMainMarkerPos().lng.toFixed(5)}`;
-  priceInput.placeholder = MIN_PRICE[apartmentType.value];
+  setDefaultOption();
 };
 
 const onError = () => {
@@ -63,9 +67,7 @@ const resetForm = () => {
   getData((advertisments) => {
     renderMarkers(advertisments,getAdTemplate);
   });
-  map.setMainMarkerPos(TOKIO_CENTER);
-  address.value = `${map.getMainMarkerPos().lat.toFixed(5)}, ${map.getMainMarkerPos().lng.toFixed(5)}`;
-  priceInput.placeholder = MIN_PRICE[apartmentType.value];
+  setDefaultOption();
 };
 
 formResetButton.addEventListener('click', () => {
@@ -91,12 +93,12 @@ titleInput.addEventListener('input', () => {
 });
 
 apartmentType.addEventListener('change', () => {
-  priceInput.placeholder = MIN_PRICE[apartmentType.value];
+  priceInput.placeholder = MIN_PRICES[apartmentType.value];
 });
 
 const checkingPrice = () => {
-  if (priceInput.value < MIN_PRICE[apartmentType.value]) {
-    priceInput.setCustomValidity(`Минимальная стоимость - ${MIN_PRICE[apartmentType.value]} р.`);
+  if (priceInput.value < MIN_PRICES[apartmentType.value]) {
+    priceInput.setCustomValidity(`Минимальная стоимость - ${MIN_PRICES[apartmentType.value]} р.`);
   } else {
     priceInput.setCustomValidity('');
   }
