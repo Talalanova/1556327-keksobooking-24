@@ -30,27 +30,28 @@ const makeMap = (mainMarkerCoordinates) =>
     getMainMarkerPos: () => mainMarker.getLatLng(),
     setMainMarkerPos: (pos) => mainMarker.setLatLng(pos),
     setSecondaryMarkers: (advertisments,template) => {
-      advertisments.forEach((ad) => {
-        const lat = ad.location.lat;
-        const lng = ad.location.lng;
-        const icon = L.icon({
-          iconUrl: 'img/pin.svg',
-          iconSize: [40, 40],
-          iconAnchor: [20, 40],
+      advertisments
+        .forEach((ad) => {
+          const lat = ad.location.lat;
+          const lng = ad.location.lng;
+          const icon = L.icon({
+            iconUrl: 'img/pin.svg',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+          });
+          const marker = L.marker(
+            {
+              lat,
+              lng,
+            },
+            {
+              icon,
+            },
+          );
+          marker
+            .addTo(markerGroup)
+            .bindPopup(template(ad));
         });
-        const marker = L.marker(
-          {
-            lat,
-            lng,
-          },
-          {
-            icon,
-          },
-        );
-        marker
-          .addTo(markerGroup)
-          .bindPopup(template(ad));
-      });
     },
     clearMarkers: () => markerGroup.clearLayers(),
     onMainMarkerMoveEnd: (func) => mainMarker.on('moveend', (evt) => func(evt.target.getLatLng())),
