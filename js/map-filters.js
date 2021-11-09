@@ -1,4 +1,4 @@
-import { getData } from './api.js';
+import {getData} from './api.js';
 import {map} from './map-set.js';
 
 const filtersForm = document.querySelector('.map__filters');
@@ -76,7 +76,6 @@ function getFiltersData(advertisments) {
 
 const disableMapForm = () => {
   filtersForm.classList.add('map__filters--disabled');
-
   filtersFormElements.forEach((item) => {
     item.disabled = true;
   });
@@ -84,7 +83,6 @@ const disableMapForm = () => {
 
 const activateMapForm = () => {
   filtersForm.classList.remove('map__filters--disabled');
-
   filtersFormElements.forEach((item) => {
     item.disabled = false;
   });

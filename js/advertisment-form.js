@@ -37,7 +37,7 @@ const onSuccess = () => {
   });
   showSuccessMessage();
   map.setMainMarkerPos(TOKIO_CENTER);
-  address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
+  address.value = `${map.getMainMarkerPos().lat.toFixed(5)}, ${map.getMainMarkerPos().lng.toFixed(5)}`;
   priceInput.placeholder = MIN_PRICE[apartmentType.value];
 };
 
@@ -64,7 +64,7 @@ const resetForm = () => {
     renderMarkers(advertisments,getAdTemplate);
   });
   map.setMainMarkerPos(TOKIO_CENTER);
-  address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
+  address.value = `${map.getMainMarkerPos().lat.toFixed(5)}, ${map.getMainMarkerPos().lng.toFixed(5)}`;
   priceInput.placeholder = MIN_PRICE[apartmentType.value];
 };
 
@@ -73,10 +73,10 @@ formResetButton.addEventListener('click', () => {
 });
 
 map.onMainMarkerMoveEnd((pos) => {
-  address.value = `${pos.lat}, ${pos.lng}`;
+  address.value = `${pos.lat.toFixed(5)}, ${pos.lng.toFixed(5)}`;
 });
 
-address.value = `${map.getMainMarkerPos().lat}, ${map.getMainMarkerPos().lng}`;
+address.value = `${map.getMainMarkerPos().lat.toFixed(5)}, ${map.getMainMarkerPos().lng.toFixed(5)}`;
 
 titleInput.addEventListener('input', () => {
   const valueLength = titleInput.value.length;
