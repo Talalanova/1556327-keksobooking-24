@@ -40,7 +40,9 @@ const setDefaultOption = () => {
 
 const clearFiles = () => {
   avatarPreview.src = 'img/muffin-grey.svg';
-  housePhotoPreview.querySelectorAll('*').forEach((element) => element.remove());
+  housePhotoPreview.querySelectorAll('*').forEach((element) => {
+    element.remove();
+  });
 };
 
 const onSuccess = () => {
