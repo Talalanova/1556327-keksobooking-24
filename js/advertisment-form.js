@@ -28,6 +28,9 @@ const MIN_PRICES = {
   flat : 1000,
 };
 
+const minCapacity = 0;
+const maxRooms = 100;
+
 const setDefaultOption = () => {
   map.setMainMarkerPos(TOKIO_CENTER);
   address.value = `${map.getMainMarkerPos().lat.toFixed(5)}, ${map.getMainMarkerPos().lng.toFixed(5)}`;
@@ -70,7 +73,8 @@ const resetForm = () => {
   setDefaultOption();
 };
 
-formResetButton.addEventListener('click', () => {
+formResetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
   resetForm();
 });
 
@@ -83,7 +87,7 @@ address.value = `${map.getMainMarkerPos().lat.toFixed(5)}, ${map.getMainMarkerPo
 titleInput.addEventListener('input', () => {
   const valueLength = titleInput.value.length;
   if (valueLength < MIN_TITLE_LENGTH) {
-    titleInput.setCustomValidity(`Минимум ${ MIN_TITLE_LENGTH} символов`);
+    titleInput.setCustomValidity(`Минимум ${MIN_TITLE_LENGTH} символов`);
   } else if (valueLength > MAX_TITLE_LENGTH) {
     titleInput.setCustomValidity(`Максимум ${MAX_TITLE_LENGTH} символов`);
   } else {
@@ -114,9 +118,9 @@ apartmentType.addEventListener('change', () => {
 });
 
 const checkingCapacity = () => {
-  if (capacity.value === '0' && roomNumber.value !=='100') {
+  if (capacity.value === `${minCapacity}` && roomNumber.value !==`${maxRooms}`) {
     capacity.setCustomValidity('Это жилье только для гостей');
-  } else if (roomNumber.value === '100' && capacity.value > 0) {
+  } else if (roomNumber.value === `${maxRooms}` && capacity.value > `${minCapacity}`) {
     capacity.setCustomValidity('В этом жилье нельзя размещать гостей');
   } else if (capacity.value > roomNumber.value) {
     capacity.setCustomValidity('Слишком много гостей для выбранного количества комнат');

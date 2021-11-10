@@ -1,3 +1,8 @@
+const mainIconSize = [52, 52];
+const mainIconAnchor = [26, 52];
+const secondaryIconSize = [40, 40];
+const secondaryIconAnchor = [20, 40];
+
 const makeMap = (mainMarkerCoordinates) =>
 {
   const map = L.map('map-canvas')
@@ -10,8 +15,8 @@ const makeMap = (mainMarkerCoordinates) =>
 
   const mainIcon = L.icon({
     iconUrl: 'img/main-pin.svg',
-    iconSize: [52, 52],
-    iconAnchor: [26, 52],
+    iconSize: mainIconSize,
+    iconAnchor: mainIconAnchor,
   });
 
   const mainMarker = L.marker(
@@ -36,8 +41,8 @@ const makeMap = (mainMarkerCoordinates) =>
           const lng = ad.location.lng;
           const icon = L.icon({
             iconUrl: 'img/pin.svg',
-            iconSize: [40, 40],
-            iconAnchor: [20, 40],
+            iconSize: secondaryIconSize,
+            iconAnchor: secondaryIconAnchor,
           });
           const marker = L.marker(
             {
