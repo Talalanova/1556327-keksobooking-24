@@ -4,6 +4,7 @@ import {getData} from './api.js';
 import {getAdTemplate} from './draw-advertisment.js';
 import {onFiltersFormChange,getFiltersData} from './map-filters.js';
 import {debounce} from './util.js';
+import {showAvatarPreview,showHousePhotoPreview} from './add-photo.js';
 
 const RERENDER_DELAY = 500;
 
@@ -17,4 +18,5 @@ getData((advertisments) => {
 });
 
 setUserFormSubmit();
-
+showAvatarPreview();
+showHousePhotoPreview();

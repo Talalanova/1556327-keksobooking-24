@@ -4,6 +4,7 @@ import {showSuccessMessage} from './show-success-message.js';
 import {map,TOKIO_CENTER,renderMarkers} from './map-set.js';
 import {getAdTemplate} from './draw-advertisment.js';
 import {filtersForm} from './map-filters.js';
+import {avatarPreview,housePhotoPreview} from './add-photo.js';
 
 const adForm = document.querySelector('.ad-form');
 const formResetButton = adForm.querySelector('.ad-form__reset');
@@ -37,6 +38,11 @@ const setDefaultOption = () => {
   priceInput.placeholder = MIN_PRICES[apartmentType.value];
 };
 
+const clearFiles = () => {
+  avatarPreview.src = 'img/muffin-grey.svg';
+  housePhotoPreview.querySelectorAll('*').forEach((element) => element.remove());
+};
+
 const onSuccess = () => {
   adForm.reset();
   filtersForm.reset();
@@ -46,6 +52,7 @@ const onSuccess = () => {
   });
   showSuccessMessage();
   setDefaultOption();
+  clearFiles();
 };
 
 const onError = () => {
@@ -71,6 +78,7 @@ const resetForm = () => {
     renderMarkers(advertisments,getAdTemplate);
   });
   setDefaultOption();
+  clearFiles();
 };
 
 formResetButton.addEventListener('click', (evt) => {
